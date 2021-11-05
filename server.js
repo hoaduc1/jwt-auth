@@ -5,6 +5,9 @@ const dbConfig = require("./app/config/db.config");
 
 const app = express();
 
+app.set('view engine', 'ejs');
+app.set('views', './app/views');
+
 var corsOptions = {
   origin: "http://localhost:8081"
 };
@@ -35,9 +38,24 @@ db.mongoose
   });
 
 // simple route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to bezkoder application." });
+app.get("/", function(req, res) {
+  res.send({ message: "Welcome to bezkoder application." });
+  // res.render('about', {});
 });
+
+// app.get('/', function(req, res, next) {
+//   var mascots = [
+//       { name: 'Sammy', organization: "DigitalOcean", birth_year: 2012},
+//       { name: 'Tux', organization: "Linux", birth_year: 1996},
+//       { name: 'Moby Dock', organization: "Docker", birth_year: 2013}
+//     ];
+//     var tagline = "No programming concept is complete without a cute animal mascot.";
+  
+//     res.render('index', {
+//       mascots: mascots,
+//       tagline: tagline
+//     });
+// });
 
 // routes
 require("./app/routes/auth.routes")(app);
