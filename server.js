@@ -38,24 +38,29 @@ db.mongoose
   });
 
 // simple route
-app.get("/", function(req, res) {
-  res.send({ message: "Welcome to bezkoder application." });
-  // res.render('about', {});
+app.get('/', function(req, res, next) {
+  var mascots = [
+      { name: 'Sammy', organization: "DigitalOcean", birth_year: 2012},
+      { name: 'Tux', organization: "Linux", birth_year: 1996},
+      { name: 'Moby Dock', organization: "Docker", birth_year: 2013}
+    ];
+    var tagline = "No programming concept is complete without a cute animal mascot.";
+  
+    res.render('index', {
+      mascots: mascots,
+      tagline: tagline
+    });
 });
 
-// app.get('/', function(req, res, next) {
-//   var mascots = [
-//       { name: 'Sammy', organization: "DigitalOcean", birth_year: 2012},
-//       { name: 'Tux', organization: "Linux", birth_year: 1996},
-//       { name: 'Moby Dock', organization: "Docker", birth_year: 2013}
-//     ];
-//     var tagline = "No programming concept is complete without a cute animal mascot.";
-  
-//     res.render('index', {
-//       mascots: mascots,
-//       tagline: tagline
-//     });
-// });
+// sign up route
+app.get('/sign-up', function(req, res, next) {
+    res.render('sign-up', {});
+});
+
+// sign in route
+app.get('/sign-in', function(req, res, next) {
+  res.render('sign-in', {});
+});
 
 // routes
 require("./app/routes/auth.routes")(app);
@@ -102,3 +107,4 @@ function initial() {
     }
   });
 }
+
